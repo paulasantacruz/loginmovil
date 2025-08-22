@@ -1,7 +1,11 @@
 package com.paula.hortitech_otro.network;
+import com.paula.hortitech_otro.models.EmailRequest;
 import com.paula.hortitech_otro.models.LoginRequest;
 import com.paula.hortitech_otro.models.LoginResponse;
 import com.paula.hortitech_otro.models.Persona;
+import com.paula.hortitech_otro.models.ResetPasswordRequest;
+import com.paula.hortitech_otro.models.VerifyCodeRequest;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,4 +23,13 @@ public interface ApiUsuario {
 
     @PUT("api/user/profile")
     Call<ResponseBody> updateAuthenticatedUserProfile(@Header("Authorization") String authToken, @Body Persona persona);
+
+    @POST("api/auth/send-reset-code")
+    Call<ResponseBody> sendPasswordResetCode(@Body EmailRequest emailRequest);
+
+    @POST("api/auth/verify-reset-code")
+    Call<ResponseBody> verifyPasswordResetCode(@Body VerifyCodeRequest verifyCodeRequest);
+
+    @POST("api/auth/reset-password")
+    Call<ResponseBody> resetPassword(@Body ResetPasswordRequest resetPasswordRequest);
 }

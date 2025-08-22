@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.paula.hortitech_otro.R;
 import com.paula.hortitech_otro.models.LoginRequest;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SessionManager sessionManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         TextInputEditText etCorreo = findViewById(R.id.etCorreo);
         TextInputEditText etContrasena = findViewById(R.id.etContrasena);
         Button btnLogin = findViewById(R.id.btnLogin);
+        TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         btnLogin.setOnClickListener(v -> {
             String correo = etCorreo.getText().toString().trim();
@@ -49,7 +52,12 @@ public class MainActivity extends AppCompatActivity {
             }
             iniciarSesion(correo, contrasena);
         });
+        tvForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
     }
+
 
     private void iniciarSesion(String correo, String contrasena) {
         ApiUsuario api = ApiClient.getClient().create(ApiUsuario.class);
@@ -67,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_LONG).show();
                 }
             }
+
+
+
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {

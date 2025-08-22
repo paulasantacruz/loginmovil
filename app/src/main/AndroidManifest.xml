@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Hortitech_otro"
         tools:targetApi="31">
         <activity
+            android:name=".view.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.HomeActvity"
             android:exported="false" />
         <activity
